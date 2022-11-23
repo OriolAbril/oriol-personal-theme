@@ -1,0 +1,64 @@
+.bd-header-article .navbar-nav > p.sidebar-header-items__title {
+  display: none;
+}
+
+.bd-main .bd-content-nav {
+  flex-direction: column;
+}
+
+.bd-header-article {
+  position: sticky;
+  top: 0;
+  max-width: calc(55em + var(--pst-sidebar-secondary));
+  align-self: center;
+  width: 100%;
+}
+
+
+.bd-header-article .navbar-nav {
+  display: flex;
+}
+.bd-main .bd-content .bd-article-container {
+  background-color: white;
+  max-width: 55em;
+}
+
+body {
+  background-color: black;
+}
+
+header.logo-header {
+  height: 15rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  pointer-events: none;
+  user-select: none;
+  padding-bottom: 2rem;
+  position: relative;
+  text-align: center;
+}
+
+.logo-header .logo {
+  -moz-pointer-events: auto;
+  -webkit-pointer-events: auto;
+  -ms-pointer-events: auto;
+  pointer-events: auto;
+  border-style: solid;
+  border-color: #ffffff;
+  border-width: 5px !important;
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  font-size: 2.25rem;
+  font-weight: 900;
+  letter-spacing: 0.075em;
+  line-height: 1;
+  padding: 1rem 1.75rem;
+  text-transform: uppercase;
+  visibility: visible;
+}
+
+.logo-header a {
+  color: white;
+}
+

@@ -1,0 +1,46 @@
+{% extends "pydata_sphinx_theme/layout.html" %}
+{# ref: https://github.com/pydata/pydata-sphinx-theme/blob/master/src/pydata_sphinx_theme/theme/pydata_sphinx_theme/layout.html #}
+
+{% set remove_sidebar_secondary = (meta is defined and meta is not none
+and 'html_theme.sidebar_secondary.remove' in meta) %}
+
+{% block docs_navbar %}
+<header class="logo-header">
+  <a href="https://oriolabrilpla.cat/" class="logo">Oriol unraveled</a>
+</header>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block docs_main %}
+  <div class="bd-content-nav bd-content">
+    {# Article header #}
+    <div class="bd-header-article">{% include "sections/header-article.html" %}</div>
+  <div class="bd-content">
+    <div class="bd-article-container">
+      {# Article content #}
+      {% block docs_body %}
+        <article class="bd-article" role="main">
+          {% block body %}{% endblock %}
+        </article>
+      {% endblock docs_body %}
+      {# Article Footer #}
+      {% if theme_show_prev_next %}
+        <footer class="bd-footer-article">
+          {% include "sections/footer-article.html" %}
+        </footer>
+      {% endif %}
+    </div>
+    {# Secondary sidebar #}
+    {% block docs_toc %}
+      {% if not remove_sidebar_secondary %}
+        <div class="bd-sidebar-secondary bd-toc">{% include "sections/sidebar-secondary.html" %}</div>
+      {% endif %}
+    {% endblock docs_toc %}
+  </div>
+  </div>
+  <footer class="bd-footer-content">
+    <div class="bd-footer-content__inner">{% include "sections/footer-content.html" %}</div>
+  </footer>
+{% endblock docs_main %}
