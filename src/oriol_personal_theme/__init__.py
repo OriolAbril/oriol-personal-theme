@@ -11,4 +11,5 @@ def setup(app):
     theme_path = Path(__file__).parent.resolve()
     app.add_html_theme("oriol_personal_theme", str(theme_path))
     app.config.templates_path.append(str(theme_path / "components"))
+    app.config.templates_path.append(str(theme_path / "ablog"))
     return {"version": __version__, "parallel_read_safe": True}

@@ -1,0 +1,52 @@
+{%- extends "page.html" %}
+
+{% block body %}
+{% macro postlink(post) -%}
+  {% if post.external_link -%}
+    {{- post.external_link -}}
+  {% else %}
+    {{- pathto(post.docname) }}{{ anchor(post) -}}
+  {%- endif %}
+{%- endmacro %}
+
+<div class="section ablog__collection">
+  <h1>
+    {% if archive_feed and fa %}
+    <a href="{{ pathto(collection.path, 1) }}/atom.xml">
+      <i class="fa-solid fa-rss fa-rotate-270"></i></a>
+      {% endif %}
+      {{ header }}
+      {% if collection.href %}
+    <a href="{{ collection.href }}">{{ collection }}</a>
+    {% else %}
+    {{ collection }}
+    {% endif %}
+  </h1>
+  <div class="blog-post-grid">
+  {% for post in collection %}
+  <div class="section ablog-post">
+    <ul class="blog-pre-title">
+      <li>
+        {% if post.published %}
+        <i class="fa fa-calendar"></i>
+        {{ post.date.strftime(ablog.post_date_format) }}
+        {% else %}
+        <i class="fa fa-pencil"></i>
+        {% if post.date %}
+        {{ post.date.strftime(ablog.post_date_format) }}
+        {% else %}
+        Draft
+        {% endif %}
+        {% endif %}
+      </li>
+    </ul>
+    <h2 class="ablog-post-title">
+      <a href="{{ postlink(post) }}">{{ post.title }}</a>
+    </h2>
+    {{ post.to_html(collection.docname) }}
+    <p class="ablog-post-expand"><a href="{{ postlink(post) }}"><em>{{ _("Read more ...") }}</em></a></p>
+  </div>
+  {% endfor %}
+  </div>
+</div>
+{% endblock %}
