@@ -1,6 +1,12 @@
 <nav class="navbar navbar-expand-lg" id="navbar-main">
-<div class="article-navbar-text-links mr-auto">
+<label class="sidebar-toggle primary-toggle" for="__primary">
+  <span class="fa-solid fa-bars"></span>
+</label>
+<div class="article-navbar-text-links">
   {% include "../components/navbar-nav.html" %}
+</div>
+<div class="article-navbar-version-switcher">
+  {% include "../components/version-switcher.html" %}
 </div>
 <div class="article-navbar-search">
   {% include "../components/search-button.html" %}
@@ -8,4 +14,9 @@
 <div class="article-navbar-icon-links">
   {% include "../components/navbar-icon-links.html" %}
 </div>
+{% if not remove_sidebar_secondary %}
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+    <span class="fa-solid fa-outdent"></span>
+  </label>
+{% endif %}
 </nav>
