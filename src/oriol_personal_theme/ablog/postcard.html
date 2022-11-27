@@ -1,0 +1,21 @@
+{% if pagename in ablog %}
+<div class="ablog__postcard">
+{% set post = ablog[pagename] %}
+<h5>
+  {% if post.published %}
+  <i class="fa-regular fa-calendar-days"></i>
+  {{ post.date.strftime(ablog.post_date_format) }}
+  {% else %}
+  <i class="fa-solid fa-pencil"></i>
+  {% if post.date %}
+  {{ post.date.strftime(ablog.post_date_format)}}
+  {% else %}
+  Draft
+  {% endif %}
+  {% endif %}
+</h5>
+<ul>
+  {% include "ablog/postcard2.html" %}
+</ul>
+</div>
+{% endif %}

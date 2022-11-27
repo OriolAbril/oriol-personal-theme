@@ -12,22 +12,50 @@ and 'html_theme.comments' in meta) %}
   {# A button hidden by default to help assistive devices quickly jump to main content #}
   {# ref: https://www.youtube.com/watch?v=VUR0I5mqq7I #}
   <a class="skip-link" href="#main">{{ _("Skip to main content") }}</a>
-
 {%- endblock %}
 
 {% block docs_navbar %}
+{% if pagename == 'index' %}
+<div id="homepage-intro">
+  <h1>Oriol Unraveled</h1>
+  <p>I am a software engineer, statistician and physicist in the making.<br>
+  I believe in interdisciplinary collaboration and open science.<br>
+Therefore, I contribute to open source software and try to publish my research as OSS packages.</p>
+  <p>I will try to use this blog to<br>
+  promote open and reproducible research practices,<br>
+share open source software and talk about my projects and experiences.</p>
+  <ul class="actions">
+    <li><a href="#main" class="scrolly">
+        <i class="button icon solo fa-solid fa-arrow-down fa-2x"></i>
+        <label class="sr-only">Continue</label>
+      </a></li>
+  </ul>
+</div>
+{% else %}
 <header class="logo-header">
-  <a href="https://oriolabrilpla.cat/" class="logo">Oriol unraveled</a>
+  <a href="{{ pathto(root_doc) }}" class="logo">Oriol unraveled</a>
 </header>
+{% endif %}
 {% endblock %}
 
 
 {% block docs_main %}
   <div class="bd-content-nav bd-content">
     {# Article header #}
-    <div class="bd-header-article">{% include "sections/header-article.html" %}</div>
+    {% if blog_catalog_collection is defined %}
+      <div class="bd-header-article bd-header-coll-catalog">
+    {% else %}
+      <div class="bd-header-article">
+    {% endif %}
+    {% include "sections/header-article.html" %}</div>
   <div class="bd-content" id="main">
-    <div class="bd-article-container">
+    {% if blog_catalog_collection is defined %}
+      <div class="bd-article-container bd-coll-catalog-page">
+    {% elif remove_sidebar_secondary %}
+      <div class="bd-article-container bd-content-page no-right-sidebar">
+    {% else %}
+      <div class="bd-article-container bd-content-page">
+    {% endif %}
       {# Article content #}
       {% block docs_body %}
         <article class="bd-article" role="main">
@@ -55,6 +83,11 @@ and 'html_theme.comments' in meta) %}
   </footer>
 {% endblock docs_main %}
 
+{%- block scripts_end %}
+{{ super() }}
+<script src="{{ pathto('_static/js/main.js', 1) }}"></script>
+{%- endblock scripts_end %}
+
 {% block footer %}
 <div class="footer-notes">
   <ul class="footer-list">
@@ -68,5 +101,5 @@ and 'html_theme.comments' in meta) %}
       <a href="https://github.com/mmistakes/jekyll-theme-basically-basic">Basically Basic</a></li>
   </ul>
 </div>
-{% endblock %}
+{% endblock footer %}
 

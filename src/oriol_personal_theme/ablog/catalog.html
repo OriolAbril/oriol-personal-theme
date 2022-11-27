@@ -1,7 +1,6 @@
 {% set blog_catalog_collection = true %}
 {%- extends "page.html" %}
 
-{% block body %}
 {% macro postlink(post) -%}
   {% if post.external_link -%}
     {{- post.external_link -}}
@@ -10,28 +9,17 @@
   {%- endif %}
 {%- endmacro %}
 
-<div class="section ablog__collection ablog-compilation">
-  {% if pagename != 'blog' %}
-  <h1 class="ablog-compilation-heading">
-    {% if archive_feed %}
-    <a href="{{ pathto(collection.path, 1) }}/atom.xml">
-      <i class="fa-solid fa-rss fa-rotate-270"></i></a>
-      {% endif %}
-      {{ header }}
-      {% if collection.href %}
-    <a href="{{ collection.href }}">{{ collection }}</a>
-    {% else %}
-    {{ collection }}
-    {% endif %}
-  </h1>
-  {% else %}
-  <style>
-    .bd-main .bd-content .bd-article-container {padding-top: 0;}
-  </style>
-  {% endif %}
+{% block body %}
+{% for collection in catalog %}
+{% if collection %}
+<div class="section ablog__catalog_header ablog-compilation">
+  <h2 class="ablog-compilation-heading">
+    {{ header }}
+    <a href="{{ pathto(collection.docname) }}">{{ collection }}</a>
+  </h2>
   <div class="blog-post-grid">
   {% for post in collection %}
-  <div class="section ablog-post ablog-post-image">
+  <div class="section ablog-post">
     <ul class="blog-pre-title">
       <li>
         {% if post.published %}
@@ -47,15 +35,17 @@
         {% endif %}
       </li>
     </ul>
-    <h2 class="ablog-post-title">
+    <h3 class="ablog-post-title">
       <a href="{{ postlink(post) }}">{{ post.title }}</a>
-    </h2>
+    </h3>
     {{ post.to_html(collection.docname) }}
     <p class="ablog-post-expand"><a href="{{ postlink(post) }}"><em>{{ _("Read more ...") }}</em></a></p>
   </div>
   {% endfor %}
   </div>
 </div>
+{% endif %}
+{% endfor %}
 {% endblock %}
 
 {% block docs_toc %}
