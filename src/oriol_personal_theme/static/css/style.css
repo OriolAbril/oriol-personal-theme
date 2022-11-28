@@ -383,10 +383,15 @@ ul.blog-pre-title, .ablog__postcard > ul {
 
 #homepage-intro p {
   color: white;
-  font-size: 1.25rem;
   font-style: italic;
   margin-top: -0.25rem;
   text-align: center;
+}
+
+@media (min-width: 650px) {
+  #homepage-intro p {
+    font-size: 1.25rem;
+  }
 }
 
 #homepage-intro ul {
