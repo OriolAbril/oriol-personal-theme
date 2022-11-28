@@ -85,7 +85,8 @@ share open source software and talk about my projects and experiences.</p>
 
 {%- block scripts_end %}
 {{ super() }}
-<script src="{{ pathto('_static/js/main.js', 1) }}"></script>
+{% include "components/matomo.html" %}
+<script src="{{ pathto('_static/js/intro.js', 1) }}"></script>
 {%- endblock scripts_end %}
 
 {% block footer %}

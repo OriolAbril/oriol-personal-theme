@@ -1,0 +1,15 @@
+<ul class="taxonomy-index">
+  {% set coll_lengths = dict() %}
+  {% for collection in catalog %}
+  {% if collection %}
+    {% set _dummy = coll_lengths.update({collection|string : collection|length})  %}
+  {% endif %}
+  {% endfor %}
+  {% for collection, coll_len in coll_lengths.items()|sort(attribute='1')|reverse %}
+    <li>
+      <a href="#{{ collection }}">
+        <strong>{{ collection }}</strong> <span class="taxonomy-count">{{ coll_len }}</span>
+      </a>
+    </li>
+  {% endfor %}
+</ul>

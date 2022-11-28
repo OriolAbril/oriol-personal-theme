@@ -10,10 +10,14 @@
 {%- endmacro %}
 
 {% block body %}
+<h1 class="ablog-compilation-heading">
+{% if catalog|string == "tags" %}Tags{% else %}Categories{% endif %}
+</h1>
+{% include "taxonomy-index.html" %}
 {% for collection in catalog %}
 {% if collection %}
 <div class="section ablog__catalog_header ablog-compilation">
-  <h2 class="ablog-compilation-heading">
+  <h2 class="ablog-compilation-heading" id="{{ collection }}">
     {{ header }}
     <a href="{{ pathto(collection.docname) }}">{{ collection }}</a>
   </h2>
