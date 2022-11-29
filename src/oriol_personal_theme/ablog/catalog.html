@@ -11,7 +11,7 @@
 
 {% block body %}
 <h1 class="ablog-compilation-heading">
-{% if catalog|string == "tags" %}Tags{% else %}Categories{% endif %}
+{% if catalog|string == "tags" %}{{ gettext('Tags') }}{% else %}{{ gettext('Categories') }}{% endif %}
 </h1>
 {% include "taxonomy-index.html" %}
 {% for collection in catalog %}
