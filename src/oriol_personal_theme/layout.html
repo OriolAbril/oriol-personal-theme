@@ -4,6 +4,15 @@
 {% set add_comments_script = (meta is defined and meta is not none
 and 'html_theme.comments' in meta) %}
 
+{% block extrahead %}
+{{ super() }}
+
+{% set file_path = pagename + '.html' %}
+
+<link rel="alternate" hreflang="en" href="https://oriolabrilpla.cat/en/{{ file_path }}" />
+<link rel="alternate" hreflang="ca" href="https://oriolabrilpla.cat/ca/{{ file_path }}" />
+{% endblock extrahead %}
+
 {% block body_tag %}
   {# set up with scrollspy to update the toc as we scroll #}
   {# ref: https://getbootstrap.com/docs/4.0/components/scrollspy/ #}
