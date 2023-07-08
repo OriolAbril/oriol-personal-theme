@@ -24,7 +24,7 @@ classifiers = [
 ]
 dynamic = ["version", "description"]
 dependencies = [
-  "pydata-sphinx-theme==0.12.0",
+  "pydata-sphinx-theme @ git+https://github.com/pydata/pydata-sphinx-theme",
 ]
 
 [project.optional-dependencies]
