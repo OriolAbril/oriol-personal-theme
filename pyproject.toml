@@ -5,7 +5,7 @@ build-backend = "flit_core.buildapi"
 [project]
 name = "oriol-personal-theme"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 license = {file = "LICENSE"}
 authors = [
     {name = "Oriol Abril Pla", email = "oriol.abril.pla@gmail.com"}
@@ -24,7 +24,7 @@ classifiers = [
 ]
 dynamic = ["version", "description"]
 dependencies = [
-  "pydata-sphinx-theme @ git+https://github.com/pydata/pydata-sphinx-theme",
+  "pydata-sphinx-theme==0.14.1",
 ]
 
 [project.optional-dependencies]

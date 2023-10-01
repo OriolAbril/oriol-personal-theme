@@ -1,6 +1,6 @@
 """A thin sphinx theme to customize and adapt pydata-sphinx-theme for my website."""
 
-__version__ = "0.1"
+__version__ = "0.1.1"
 
 from pathlib import Path
 
