@@ -20,8 +20,9 @@ and 'html_theme.comments' in meta) %}
 
   {# A button hidden by default to help assistive devices quickly jump to main content #}
   {# ref: https://www.youtube.com/watch?v=VUR0I5mqq7I #}
-  <a class="skip-link" href="#main">{{ _("Skip to main content") }}</a>
-{%- endblock %}
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main">{{ _("Skip to main content") }}</a></div>
+
+{%- endblock body_tag %}
 
 {% block docs_navbar %}
 {% if pagename == 'index' %}
@@ -40,28 +41,30 @@ and 'html_theme.comments' in meta) %}
   <a href="{{ pathto(root_doc) }}" class="logo">Oriol unraveled</a>
 </header>
 {% endif %}
-{% endblock %}
+{% endblock docs_navbar %}
 
 
 {% block docs_main %}
   <div class="bd-content-nav bd-content">
     {# Article header #}
     {% if blog_catalog_collection is defined %}
-      <div class="bd-header-article bd-header-coll-catalog">
+      <div class="bd-header-article d-print-none bd-header-coll-catalog">
     {% else %}
-      <div class="bd-header-article">
+      <div class="bd-header-article d-print-none">
     {% endif %}
-    {% include "sections/header-article.html" %}</div>
-  <div class="bd-content" id="main">
-    {% if blog_catalog_collection is defined %}
-      <div class="bd-article-container bd-coll-catalog-page">
-    {% elif remove_sidebar_secondary %}
-      <div class="bd-article-container bd-content-page no-right-sidebar">
-    {% else %}
-      <div class="bd-article-container bd-content-page">
-    {% endif %}
+    {% include "sections/header-article.html" %}
+      </div> {# closing div from if block right above #}
+    <div class="bd-content" id="main">
+      {% if blog_catalog_collection is defined %}
+        <div class="bd-article-container bd-coll-catalog-page">
+      {% elif remove_sidebar_secondary %}
+        <div class="bd-article-container bd-content-page no-right-sidebar">
+      {% else %}
+        <div class="bd-article-container bd-content-page">
+      {% endif %}
       {# Article content #}
       {% block docs_body %}
+        {% include "components/searchbox.html" %}
         <article class="bd-article" role="main">
           {% block body %}{% endblock %}
         </article>
@@ -70,14 +73,15 @@ and 'html_theme.comments' in meta) %}
       <footer class="bd-footer-article">
         {% include "sections/footer-article.html" %}
       </footer>
+        </div> {# closing div from if block above footer and article blocks #}
+      {# Secondary sidebar #}
+      {% block docs_toc %}
+        {% if not remove_sidebar_secondary %}
+          <dialog id="pst-secondary-sidebar-modal"></dialog>
+          <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc">{% include "sections/sidebar-secondary.html" %}</div>
+        {% endif %}
+      {% endblock docs_toc %}
     </div>
-    {# Secondary sidebar #}
-    {% block docs_toc %}
-      {% if not remove_sidebar_secondary %}
-        <div class="bd-sidebar-secondary bd-toc">{% include "sections/sidebar-secondary.html" %}</div>
-      {% endif %}
-    {% endblock docs_toc %}
-  </div>
   </div>
   <footer class="bd-footer-content">
     <div class="bd-footer-content__inner">{% include "sections/footer-content.html" %}</div>
@@ -96,11 +100,7 @@ and 'html_theme.comments' in meta) %}
 {% block footer %}
 <div class="footer-notes">
   <ul class="footer-list">
-    <li>&copy; Oriol Abril Pla |
-      <a href="https://github.com/OriolAbril" title="GitHub" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fa-brands fa-github"></i></span><label class="sr-only">GitHub</label></a> |
-      <a href="https://toot.cat/@oriolabril" title="Mastodon" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fa-brands fa-mastodon"></i></span><label class="sr-only">Mastodon</label></a> |
-      <a href="https://oriolabrilpla.cat/{{ language }}/blog/atom.xml" title="Atom Feed" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fa-solid fa-rss"></i></span><label class="sr-only">Atom Feed</label></a>
-    </li>
+    <li>&copy; Oriol Abril Pla</li>
     <li>Powered by <a href="https://www.sphinx-doc.org">sphinx</a></li>
     <li>Design by <a href="https://pydata-sphinx-theme.readthedocs.io/">pydata-sphinx-theme</a>, <a href="https://html5up.net" rel="nofollow">HTML5 UP</a> &
       <a href="https://github.com/mmistakes/jekyll-theme-basically-basic">Basically Basic</a></li>

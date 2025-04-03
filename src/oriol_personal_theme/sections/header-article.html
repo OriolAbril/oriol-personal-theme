@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg" id="navbar-main">
-<label class="sidebar-toggle primary-toggle" for="__primary">
+<button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="{{ _('Site navigation') }}">
   <span class="fa-solid fa-bars"></span>
-</label>
+</button>
 <div class="article-navbar-text-links">
   {% include "../components/navbar-nav.html" %}
 </div>
@@ -15,8 +15,8 @@
   {% include "../components/navbar-icon-links.html" %}
 </div>
 {% if not remove_sidebar_secondary %}
-  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+  <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="{{ _('On this page') }}">
     <span class="fa-solid fa-outdent"></span>
-  </label>
+  </button>
 {% endif %}
 </nav>
