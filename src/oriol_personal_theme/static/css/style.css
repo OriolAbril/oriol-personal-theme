@@ -234,6 +234,7 @@ button.sidebar-toggle {
   margin: 0;
   color: white;
   background: inherit;
+  margin-left: 1rem;
 }
 
 @media (min-width: 1200px) {
@@ -261,6 +262,12 @@ button.sidebar-toggle {
 @media (max-width: 959px) {
   .article-navbar-icon-links {
     display: none;
+  }
+}
+
+@media (max-width: 959px) {
+  button.sidebar-toggle {
+    margin-left: 0;
   }
 }
 
